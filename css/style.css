@@ -46,7 +46,7 @@ h3 {
 }
 
 #display {
-    font-size: clamp(5rem, 10vw, 10rem);
+    font-size: clamp(4rem, 4vw, 8rem);
     margin: 0;
     padding-bottom: 10px;
     border-bottom: 2px solid var(--border-color);
