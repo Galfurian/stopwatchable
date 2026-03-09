@@ -19,45 +19,31 @@ function formatTime(milliseconds) {
     return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}.${String(centiseconds).padStart(2, '0')}`;
 }
 
-function getElapsedTime() {
-    if (timerId === null) {
-        return elapsedBeforeStart;
-    }
-
-    return elapsedBeforeStart + (Date.now() - startTime);
-}
 
 function renderDisplay() {
-    display.textContent = formatTime(getElapsedTime());
+    const elapsed = elapsedBeforeStart + (timerId ? (Date.now() - startTime) : 0);
+    display.textContent = formatTime(elapsed);
 }
 
 function setButtonStates(isRunning) {
     startStopBtn.textContent = isRunning ? 'Stop' : 'Start';
-    startStopBtn.disabled = false;
     lapBtn.disabled = !isRunning;
 }
 
-function startStop() {
-    if (timerId !== null) {
-        // already running
-        return;
-    }
-
-    startTime = Date.now();
-    timerId = setInterval(renderDisplay, 10);
-    setButtonStates(true);
-}
-
-function stop() {
+function toggleStartStop() {
     if (timerId === null) {
-        return;
+        // start
+        startTime = Date.now();
+        timerId = setInterval(renderDisplay, 10);
+        setButtonStates(true);
+    } else {
+        // stop
+        elapsedBeforeStart += Date.now() - startTime;
+        clearInterval(timerId);
+        timerId = null;
+        renderDisplay();
+        setButtonStates(false);
     }
-
-    elapsedBeforeStart += Date.now() - startTime;
-    clearInterval(timerId);
-    timerId = null;
-    renderDisplay();
-    setButtonStates(false);
 }
 
 
@@ -68,7 +54,8 @@ function addLap() {
 
     lapCount += 1;
     const lapItem = document.createElement('li');
-    lapItem.textContent = `Lap ${lapCount}: ${formatTime(getElapsedTime())}`;
+    const elapsed = elapsedBeforeStart + (timerId ? (Date.now() - startTime) : 0);
+    lapItem.textContent = `Lap ${lapCount}: ${formatTime(elapsed)}`;
 
     // Newest lap at the top so it's visible without scrolling.
     lapsList.prepend(lapItem);
@@ -88,10 +75,7 @@ function resetStopwatch() {
     setButtonStates(false);
 }
 
-startStopBtn.addEventListener('click', () => {
-    if (timerId === null) startStop();
-    else stop();
-});
+startStopBtn.addEventListener('click', toggleStartStop);
 lapBtn.addEventListener('click', addLap);
 resetBtn.addEventListener('click', resetStopwatch);
 
