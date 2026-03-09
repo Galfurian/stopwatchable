@@ -31,16 +31,6 @@ h3 {
     color: var(--text-secondary);
 }
 
-h1 {
-    font-size: 2.5rem;
-    margin-bottom: 30px;
-    text-align: center;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
 .container {
     max-width: min(900px, 96vw);
     margin: 0 auto;
@@ -61,8 +51,13 @@ h1 {
     border-bottom: 2px solid var(--border-color);
     text-align: center;
     font-family: 'Courier New', monospace;
-    font-size: clamp(1.5rem, 8vw, 2.6rem);
+    /* scale to fill available width (approx 4 characters plus fraction) */
+    font-size: clamp(2rem, 18vw, 10rem);
     letter-spacing: clamp(0px, 0.15vw, 1px);
+    width: 100%;
+    box-sizing: border-box;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .fraction {
@@ -71,14 +66,14 @@ h1 {
 }
 
 button {
-    padding: clamp(5px, 0.9vw, 8px) clamp(7px, 1.5vw, 14px);
+    padding: clamp(0.5rem, 1.5vw, 1rem) clamp(0.7rem, 2vw, 1.4rem);
     cursor: pointer;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: #ffffff;
     border: none;
     border-radius: 6px;
     font-weight: 500;
-    font-size: clamp(0.72rem, 1.7vw, 1rem);
+    font-size: clamp(1.0rem, 2.5vw, 10.0rem);
     white-space: nowrap;
     min-width: 0;
     transition: all 0.2s ease;
@@ -129,14 +124,4 @@ hr {
     margin-bottom: 6px;
     font-family: monospace;
     color: var(--text-primary);
-}
-
-@media (max-width: 768px) {
-    .controls {
-        padding: clamp(8px, 2vw, 15px);
-    }
-
-    #display {
-        font-size: clamp(1.6rem, 9vw, 5.0rem);
-    }
 }
