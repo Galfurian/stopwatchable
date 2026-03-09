@@ -1,6 +1,5 @@
 const display = document.getElementById('display');
-const startBtn = document.getElementById('startBtn');
-const stopBtn = document.getElementById('stopBtn');
+const startStopBtn = document.getElementById('startStopBtn');
 const lapBtn = document.getElementById('lapBtn');
 const resetBtn = document.getElementById('resetBtn');
 const lapsList = document.getElementById('lapsList');
@@ -33,13 +32,14 @@ function renderDisplay() {
 }
 
 function setButtonStates(isRunning) {
-    startBtn.disabled = isRunning;
-    stopBtn.disabled = !isRunning;
+    startStopBtn.textContent = isRunning ? 'Stop' : 'Start';
+    startStopBtn.disabled = false;
     lapBtn.disabled = !isRunning;
 }
 
-function startStopwatch() {
+function startStop() {
     if (timerId !== null) {
+        // already running
         return;
     }
 
@@ -48,7 +48,7 @@ function startStopwatch() {
     setButtonStates(true);
 }
 
-function stopStopwatch() {
+function stop() {
     if (timerId === null) {
         return;
     }
@@ -59,6 +59,7 @@ function stopStopwatch() {
     renderDisplay();
     setButtonStates(false);
 }
+
 
 function addLap() {
     if (timerId === null) {
@@ -87,8 +88,10 @@ function resetStopwatch() {
     setButtonStates(false);
 }
 
-startBtn.addEventListener('click', startStopwatch);
-stopBtn.addEventListener('click', stopStopwatch);
+startStopBtn.addEventListener('click', () => {
+    if (timerId === null) startStop();
+    else stop();
+});
 lapBtn.addEventListener('click', addLap);
 resetBtn.addEventListener('click', resetStopwatch);
 
