@@ -121,3 +121,25 @@ hr {
     margin-bottom: 6px;
     color: var(--text-primary);
 }
+
+/* fullscreen toggle fixed button */
+#fsBtn {
+    position: fixed;
+    bottom: 12px;
+    right: 12px;
+    opacity: 0.6;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    backdrop-filter: blur(4px);
+    padding: 10px 20px;
+    border-radius: 6px;
+    border: none;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+    color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+#fsBtn:hover {
+    opacity: 1;
+}

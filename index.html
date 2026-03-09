@@ -9,18 +9,19 @@
 <body>
     <div class="container">
         <section class="controls" aria-label="Stopwatch">
-            <h3 id="display" aria-live="polite">00:00.00</h3>
+            <h1 id="display" aria-live="polite">00:00.00</h1>
 
-            <div class="dropdown-container" role="group" aria-label="Stopwatch controls">
+            <div class="button-container" role="group" aria-label="Stopwatch controls">
                 <button id="startStopBtn" type="button">Start</button>
                 <button id="lapBtn" type="button" disabled>Lap</button>
                 <button id="resetBtn" type="button">Reset</button>
+                <button id="fsBtn" type="button" title="Toggle fullscreen">⛶</button>
             </div>
 
             <hr>
 
-            <h3>Laps</h3>
-            <ol id="lapsList" aria-live="polite"></ol>
+            <h2>Laps</h2>
+            <ul id="lapsList" aria-live="polite"></ul>
         </section>
     </div>
 

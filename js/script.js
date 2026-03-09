@@ -2,6 +2,7 @@ const display = document.getElementById('display');
 const startStopBtn = document.getElementById('startStopBtn');
 const lapBtn = document.getElementById('lapBtn');
 const resetBtn = document.getElementById('resetBtn');
+const fsBtn = document.getElementById('fsBtn');
 const lapsList = document.getElementById('lapsList');
 
 let startTime = 0;
@@ -49,6 +50,14 @@ function toggleStartStop() {
 }
 
 
+function toggleFullscreen() {
+    if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+    } else {
+        document.exitFullscreen().catch(() => {});
+    }
+}
+
 function addLap() {
     if (timerId === null) {
         return;
@@ -80,6 +89,7 @@ function resetStopwatch() {
 startStopBtn.addEventListener('click', toggleStartStop);
 lapBtn.addEventListener('click', addLap);
 resetBtn.addEventListener('click', resetStopwatch);
+fsBtn.addEventListener('click', toggleFullscreen);
 
 renderDisplay();
 setButtonStates(false);
